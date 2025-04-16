@@ -1,133 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Calculadora de Jornadas Laborales</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 30px;
-      background: #f5f5f5;
-    }
-
-    h1 {
-      color: #444;
-      text-align: center;
-    }
-
-    .inline-fields {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    label {
-      font-weight: bold;
-      color: black;
-    }
-
-    .jornada label.dia {
-      font-weight: bold;
-      color: black;
-      margin-right: 8px;
-    }
-
-    input[type="datetime-local"],
-    input[type="number"] {
-      padding: 5px;
-      width: 160px;
-    }
-
-    @media (max-width: 600px) {
-      .inline-fields {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      input[type="datetime-local"],
-      input[type="number"] {
-        width: 100%;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 30px;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    th {
-      background-color: #e0e0e0;
-      text-align: center;
-    }
-
-    td:last-child {
-      text-align: center;
-    }
-
-    .cantidad-horas {
-      text-align: center;
-    }
-
-    .total-row td:first-child {
-      text-align: right;
-    }
-
-    .btn {
-      padding: 8px 16px;
-      margin-top: 10px;
-      background-color: #2196f3;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .btn:hover {
-      background-color: #1976d2;
-    }
-
-    .btn-eliminar {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
-    .btn-eliminar:hover {
-      background-color: #d32f2f;
-    }
-
-    .btn-agregar {
-      background-color: #4CAF50;
-    }
-
-    .btn-agregar:hover {
-      background-color: #388e3c;
-    }
-
-    #detalleTotal {
-      font-weight: bold;
-      color: green;
-    }
-  </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Calculadora de Jornadas Laborales</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background: #f5f5f5;
+          }
+      
+          h1 {
+            color: #444;
+            text-align: center;
+          }
+      
+          .inline-fields {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+          }
+      
+          label {
+            font-weight: bold;
+            color: black;
+          }
+      
+          .jornada label.dia {
+            font-weight: bold;
+            color: black;
+            margin-right: 8px;
+          }
+      
+          input[type="datetime-local"],
+          input[type="number"] {
+            padding: 5px;
+            width: 160px;
+            max-width: 100%;
+          }
+      
+          @media (max-width: 768px) {
+            body {
+              margin: 15px;
+            }
+      
+            .inline-fields {
+              flex-direction: column;
+              align-items: stretch;
+            }
+      
+            .inline-fields label {
+              margin-bottom: 5px;
+            }
+      
+            input[type="datetime-local"],
+            input[type="number"],
+            .btn,
+            .btn-eliminar {
+              width: 100%;
+            }
+      
+            .btn {
+              margin-top: 5px;
+            }
+          }
+      
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            overflow-x: auto;
+            display: block;
+          }
+      
+          th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+          }
+      
+          th {
+            background-color: #e0e0e0;
+            text-align: center;
+          }
+      
+          td:last-child {
+            text-align: center;
+          }
+      
+          .cantidad-horas {
+            text-align: center;
+          }
+      
+          .total-row td:first-child {
+            text-align: right;
+          }
+      
+          .btn {
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+          }
+      
+          .btn:hover {
+            background-color: #1976d2;
+          }
+      
+          .btn-eliminar {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            cursor: pointer;
+          }
+      
+          .btn-eliminar:hover {
+            background-color: #d32f2f;
+          }
+      
+          .btn-agregar {
+            background-color: #4CAF50;
+          }
+      
+          .btn-agregar:hover {
+            background-color: #388e3c;
+          }
+      
+          #detalleTotal {
+            font-weight: bold;
+            color: green;
+          }
+      
+          @media (max-width: 768px) {
+            table {
+              font-size: 14px;
+            }
+      
+            th, td {
+              padding: 8px;
+            }
+          }
+        </style>
+      </head>
+      
 <body>
   <h1>Calculadora de Jornadas Laborales (Mensual)</h1>
 
